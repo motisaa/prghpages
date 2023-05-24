@@ -10,17 +10,15 @@ jobs:
       run: echo ${{ secrets.USERNAME }}
   
   deploy:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@master
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
       with:
-        host: http://108.142.124.137/
-        username: jorloque
-        password: @1234Pepe#1234
-        port: 22
+        host: "http://108.142.124.137/"
+        username: "jorloque"
+        password: "@1234Pepe#1234"
+        port: "22"
         source: "site/*"
         target: "/var/www/html"
