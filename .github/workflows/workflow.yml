@@ -15,10 +15,11 @@ jobs:
     - uses: actions/checkout@master
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.SSHKEY }}
-        port: ${{ secrets.PORT }}
         source: "site/*"
         target: "/var/www/html"
