@@ -1,6 +1,6 @@
-name: despliegue a azure
+name: despliega a Azure
 
-on: [push, workflow_dispatch]
+on: [push]
 
 jobs:
   deploy:
@@ -8,7 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master    
-    - name: Copiar el contenido del repositorio con scp      
-      run: echo ${{ secrets.USERNAME }}
-      
+    - uses: actions/checkout@master
+    - name: Copiar el contenido del repositorio con scp
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+      with:
+        source: "site/*"
+        target: "/var/www/html"
