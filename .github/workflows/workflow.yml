@@ -20,5 +20,5 @@ jobs:
         username: "jorloque"
         password: "@1234Pepe#1234"
         port: "22"
-        source: "site/*"
+        source: "index.html"
         target: "/var/www/html"
