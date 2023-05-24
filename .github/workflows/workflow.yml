@@ -1,26 +1,25 @@
-name: Deploy to GitHub Pages
+name: despliega a Azure
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    steps:
+    - name: probando
+      run: echo ${{ secrets.USERNAME }}
+  
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@v0.1.4
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
       with:
-        submodules: 'recursive'
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    - name: Build and deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        publish_dir: ./public
-        publish_branch: gh-pages
-        cname: example.com # Opcional
-
+        source: "site/*"
+        target: "/var/www/html"
