@@ -1,6 +1,6 @@
 name: despliega a Azure
 
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   prueba:
