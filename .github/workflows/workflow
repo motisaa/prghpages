@@ -22,4 +22,4 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
       with:
         source: "index.html"
-        target: "/var/www/html"
+        target: "/home/jorloque/webs"
